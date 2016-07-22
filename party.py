@@ -26,21 +26,14 @@ def is_mel(name, email):
 
 def most_and_least_common_type(treats):
     """Given list of treats, return {most, least} common types.
-
-        >>> sample_treats = [{"type": "dessert"},{"type": "dessert"},{"type": "drink"}]
-        >>> most_and_least_common_type(sample_treats)
+        
+        >>> most_and_least_common_type([{"type": "dessert"},{"type": "dessert"},{"type": "drink"}])
         ('dessert', 'drink')
 
-        >>> sample_treats = [{"type": "dessert"},{"type": "dessert"},]
-        >>> most_and_least_common_type(sample_treats)
-        "Dont bring ['dessert']"
+        >>> most_and_least_common_type([{"type": "dessert"},{"type": "dessert"},])
+        "Don't bring dessert"
 
-        sample_treats = [{"type": "dessert"},{"type": "drink"},]
-        >>> most_and_least_common_type(sample_treats)
-        'Anything goes'
-
-        >>> sample_treats = []
-        >>> most_and_least_common_type(sample_treats)
+        >>> most_and_least_common_type([{"type": "dessert"},{"type": "drink"},])
         'Anything goes'
 
     """
@@ -63,12 +56,15 @@ def most_and_least_common_type(treats):
             least_count = count
             least_type = ttype
     if len(types) == 1:
-        only_type = types.keys()
-        return "Dont bring %s" % (only_type)
-    elif most_type == least_type:
+        # if there is only one type, ask them to bring not that type
+        return "Don't bring " + str(types.keys()[0])
+    elif most_count == least_count:
+        # for ties, no preference is specified
         return "Anything goes"
     else:
+        # otherwise show the least and most
         return (most_type, least_type)
+
 
 
 def get_treats():
